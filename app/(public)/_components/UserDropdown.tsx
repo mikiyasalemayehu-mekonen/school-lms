@@ -39,7 +39,7 @@ export function UserDropdown({name, email, image}: iAppProps  ) {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="max-w-64">
+      <DropdownMenuContent align="end" className="min-w-48">
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
             <Link href="/" >

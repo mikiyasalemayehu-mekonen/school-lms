@@ -138,12 +138,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <Link href="/">
-                <Image src={Logo} alt="logo">
+    <Link href="/" className="flex items-center gap-2">
+  <Image src={Logo} alt="logo" />
+  <span className="text-base font-semibold">LMS</span>
+</Link>
 
-                <span className="text-base font-semibold">LMS</span>
-              </Image>
-              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
