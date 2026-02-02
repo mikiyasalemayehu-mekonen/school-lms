@@ -1,5 +1,4 @@
 // lib/db.ts
-import "server-only";
 
 import { PrismaClient } from "../lib/generated/prisma";
 

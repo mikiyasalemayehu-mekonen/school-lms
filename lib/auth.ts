@@ -1,4 +1,4 @@
-import "server-only";
+
 
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
@@ -6,6 +6,8 @@ import { prisma } from "./db";
 import { env } from "./env";
 import { emailOTP } from "better-auth/plugins"
 import { resend } from "./resend";
+import {admin} from "better-auth/plugins"
+
 export const auth = betterAuth({
       database: prismaAdapter(prisma, {
         provider: "postgresql", // or "mysql", "postgresql", ...etc
@@ -20,11 +22,11 @@ export const auth = betterAuth({
     plugins: [
         emailOTP({
             async sendVerificationOTP({ email, otp }) {
-                console.log(`\n= == OTP FOR ${email} ===`);
+        //         console.log(`\n= == OTP FOR ${email} ===`);
 
-        console.log(`OTP Code: ${otp}`);
-        console.log(`Expires in: ~10 minutes (depending on your Better Auth config)`);
-        console.log(`========================\n`);
+        // console.log(`OTP Code: ${otp}`);
+        // console.log(`Expires in: ~10 minutes (depending on your Better Auth config)`);
+        // console.log(`========================\n`);
             const { data, error } = await resend.emails.send({
             from: 'School of Marvel <onboarding@resend.dev>',
             to: [email],
@@ -32,6 +34,7 @@ export const auth = betterAuth({
             html:'<P>Your OTP code is: <strong>' + otp + '</strong></P><p>This code will expire in ~10 minutes.</p>',
         });
             },
-        })
-    ]
+        }),
+        admin()
+    ],
 });

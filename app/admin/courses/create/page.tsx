@@ -7,14 +7,22 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { PlusIcon, SparkleIcon } from "lucide-react";
+import { Loader2, PlusIcon, SparkleIcon } from "lucide-react";
 import slugify from "slugify";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RichTextEditor } from "@/components/rich-text-editor/Editor";
 import { Uploader } from "@/components/file-uploader/Uploader";
+import { useTransition } from "react";
+import { tryCatch } from "@/hooks/try-catch";
+import { CreateCourse } from "./actions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function CourseCreationPage() {
+    const [Pending,startTransition] = useTransition();
+    const router = useRouter()
+
     const form = useForm<CourseSchemaType>({
     resolver: zodResolver(CourseCreateSchema),
     defaultValues: {
@@ -30,9 +38,29 @@ export default function CourseCreationPage() {
       status: "DRAFT",
     },
   });
-    function onSubmit(data:CourseSchemaType) {
-    // Do something with the form values.
-    console.log(data)
+    function onSubmit(values:CourseSchemaType) {
+        startTransition(async() =>{
+            const {data:result,error} = await tryCatch(CreateCourse(values));
+            if (error){
+                toast.error("An Unexpected error Occured. please try again");
+
+                return ;
+            }
+            if (result.status==="success"){
+                toast.success(result.message)
+                form.reset()
+                router.push("/admin/courses")
+
+            }
+            else if (result.status==="error"){
+                toast.error(result.message);
+            }
+
+
+        });
+
+
+
   }
     return (
         <>
@@ -104,11 +132,11 @@ export default function CourseCreationPage() {
                         </FormItem>
 
                        )}/>
-                        <FormField control={form.control} name="filekey"  render={({field })=>(
+                        <FormField control={form.control} name="fileKey"  render={({field })=>(
                         <FormItem>
                             <FormLabel>Thumbnail image</FormLabel>
                             <FormControl>
-                                <Uploader/>
+                                <Uploader onChange={field.onChange} value={field.value}/>
 
                             </FormControl>
                             <FormMessage />
@@ -137,7 +165,7 @@ export default function CourseCreationPage() {
                         </FormItem>
 
                        )}/>
-                       <FormField control={form.control} name="Level"  render={({field })=>(
+                       <FormField control={form.control} name="level"  render={({field })=>(
                         <FormItem>
                             <FormLabel>Level</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -158,7 +186,7 @@ export default function CourseCreationPage() {
                         </FormItem>
 
                        )}/>
-                         <FormField control={form.control} name="Duration"  render={({field })=>(
+                         <FormField control={form.control} name="duration"  render={({field })=>(
                         <FormItem>
                             <FormLabel>Duration(hours)</FormLabel>
                             <FormControl>
@@ -168,7 +196,7 @@ export default function CourseCreationPage() {
                         </FormItem>
 
                        )}/>
-                        <FormField control={form.control} name="Price"  render={({field })=>(
+                        <FormField control={form.control} name="price"  render={({field })=>(
                         <FormItem>
                             <FormLabel>Price($)</FormLabel>
                             <FormControl>
@@ -180,7 +208,7 @@ export default function CourseCreationPage() {
                        )}/>
 
                         </div>
-                        <FormField control={form.control} name="Status"  render={({field })=>(
+                        <FormField control={form.control} name="status"  render={({field })=>(
                         <FormItem>
                             <FormLabel>Status</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -200,7 +228,19 @@ export default function CourseCreationPage() {
                             <FormMessage />
                         </FormItem>
                           )}/>
-                        <Button type="submit">Create Course<PlusIcon className="ml-1 h-4 w-4" size={16} /></Button>
+                        <Button type="submit" disabled={Pending}>
+                            {Pending?(
+                                <>
+                                Creating ...
+                                <Loader2 className="animate-spin ml-1"/>
+                                </>
+                            ):(
+                                <>
+                                            Create Course<PlusIcon className="ml-1 h-4 w-4" size={16} /></>
+                            )
+                            }
+                            </Button>
+
 
                     </form>
 
