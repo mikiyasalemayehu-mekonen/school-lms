@@ -12,7 +12,7 @@ export default function NotAdminRoute(){
                 <ShieldX className="size-16 text-destructive"></ShieldX>
                 </div>
                 <CardTitle className="text-2xl" >Access Restricted</CardTitle>
-                <CardDescription className="max-w-xs mx-auto">Hey! You are not an admin,you can not create courses</CardDescription>
+                <CardDescription className="max-w-xs mx-auto">Hey! You are not an admin, you can not create courses</CardDescription>
             </CardHeader>
             <CardContent>
                 <Link href="/" className={buttonVariants({
