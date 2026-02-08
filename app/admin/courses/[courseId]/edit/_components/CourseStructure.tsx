@@ -2,17 +2,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DndContext, DragEndEvent, DraggableSyntheticListeners, KeyboardSensor, PointerSensor, rectIntersection, useSensor, useSensors } from "@dnd-kit/core";
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { act, ReactNode, useEffect, useState } from "react";
+import {  ReactNode, useEffect, useState } from "react";
 import {CSS} from '@dnd-kit/utilities';
 import { AdminCourseSingularType } from "@/app/data/admin/admin-get-course";
 import { cn } from "@/lib/utils";
-import { listeners } from "process";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronRight, ChevronRightIcon, FileText, GripVertical, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronRight, FileText, GripVertical, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
 import { reorderChapters, reorderLessons } from "../actions";
+import { NewChapter } from "./NewChapterModal";
 
 interface iAppProps{
     data:AdminCourseSingularType
@@ -235,6 +235,7 @@ function toggleChapter(chapterId:string) {
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between border-b border-border ">
                     <CardTitle>Chapters</CardTitle>
+                    <NewChapter courseId={data.id}/>
 
                 </CardHeader>
                 <CardContent className="space-y-8">
