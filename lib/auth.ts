@@ -22,11 +22,6 @@ export const auth = betterAuth({
     plugins: [
         emailOTP({
             async sendVerificationOTP({ email, otp }) {
-        //         console.log(`\n= == OTP FOR ${email} ===`);
-
-        // console.log(`OTP Code: ${otp}`);
-        // console.log(`Expires in: ~10 minutes (depending on your Better Auth config)`);
-        // console.log(`========================\n`);
             const { data, error } = await resend.emails.send({
             from: 'School of Marvel <onboarding@resend.dev>',
             to: [email],
