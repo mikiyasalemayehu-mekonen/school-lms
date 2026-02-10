@@ -62,7 +62,7 @@ export const lessonSchema = z.object({
   courseId:z.string().uuid({
     message:"Invalid course Id"
   }),
-  desciption:z.string().min(3, {message:"Description Must be atleast 3 characters long."}).optional(),
+  description:z.string().min(3, {message:"Description Must be atleast 3 characters long."}).optional(),
   thumbnailKey:z.string().optional( ),
   videoKey:z.string().optional( ),
 

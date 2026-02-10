@@ -136,7 +136,7 @@ export default function CourseCreationPage() {
                         <FormItem>
                             <FormLabel>Thumbnail image</FormLabel>
                             <FormControl>
-                                <Uploader onChange={field.onChange} value={field.value}/>
+                                <Uploader fileTypeAccepted="image" onChange={field.onChange} value={field.value}/>
 
                             </FormControl>
                             <FormMessage />
