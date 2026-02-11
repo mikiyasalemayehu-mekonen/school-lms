@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 
 export async function adminGetCourse(id:string){
+
     await requireAdmin();
 
     const data = await prisma.course.findUnique(        {
