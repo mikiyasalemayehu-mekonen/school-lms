@@ -9,6 +9,7 @@ export function RichTextEditor({field}:{field:any}) {
 
         TextAlign.configure({types: ['heading', 'paragraph'],
 
+
         }),
         ],
         editorProps:{

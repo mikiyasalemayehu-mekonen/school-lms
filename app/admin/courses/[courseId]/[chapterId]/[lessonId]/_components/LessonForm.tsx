@@ -75,7 +75,8 @@ export function LessonForm({chapterId,data,courseId}:iAppProps){
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
-                        <form className="space-y-6" onSubmit={}>
+<form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+
                             <FormField
                             control={form.control}
                             name="name"
