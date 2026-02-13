@@ -4,20 +4,11 @@ import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
 import { CourseCreateSchema, CourseSchemaType } from "@/lib/zodSchemas";
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import arcjet, {  fixedWindow } from "@/lib/arcjet";
 import { request } from "@arcjet/next";
 
 
-const aj = arcjet.withRule(
-    detectBot(
-        {
-        mode:"LIVE",
-        allow:[],
-
-    }
-    )
-
-).withRule(
+const aj =arcjet.withRule(
     fixedWindow({
         mode:"LIVE",
         window:"1m",

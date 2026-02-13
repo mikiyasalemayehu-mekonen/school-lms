@@ -4,11 +4,41 @@ import { requireAdmin } from "@/app/data/admin/require-admin"
 import { prisma } from "@/lib/db"
 import { ApiResponse } from "@/lib/types"
 import { revalidatePath } from "next/cache"
+import arcjet, {fixedWindow } from "@/lib/arcjet";
+import { request } from "@arcjet/next";
+
+
+const aj = arcjet.withRule(
+    fixedWindow({
+        mode:"LIVE",
+        window:"1m",
+        max:5,
+    })
+);
 
 export async function deleteCourse(courseId:string): Promise<ApiResponse>{
-    await requireAdmin()
+    const session = await requireAdmin()
+        try{
+            const req = await request();
+            const decision = await arcjet.protect(req,{
+                fingerprint:session.user.id,
 
-    try{
+
+            })
+            if (decision.isDenied()){
+                if (decision.reason.isRateLimit()){
+                    return {
+                        status:"error",
+                        message:"Rate limit exceeded",
+                    }
+                }
+                else{
+                    return {
+                        status:"error",
+                        message:"Bot detected",
+
+                    }
+                }}
         await  prisma.course.delete({
             where:{
                 id:courseId
@@ -19,9 +49,8 @@ export async function deleteCourse(courseId:string): Promise<ApiResponse>{
             status: "success",
             message: "Course deleted successfully"
         }
-
-
     }
+
     catch{
         return {
             status: "error",

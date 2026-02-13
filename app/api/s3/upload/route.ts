@@ -5,11 +5,7 @@ import {z} from "zod"
 import {v4 as uuidv4} from "uuid";
 import {getSignedUrl} from '@aws-sdk/s3-request-presigner'
 import { S3 } from "@/lib/S3Client";
-import { detectBot, fixedWindow } from "@arcjet/next";
-import { apiKey } from "better-auth/plugins";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { Fingerprint } from "lucide-react";
+import {  fixedWindow } from "@arcjet/next";
 import arcjet from "@/lib/arcjet";
 import { requireAdmin } from "@/app/data/admin/require-admin";
 
@@ -21,15 +17,6 @@ export const fileUploadSchema = z.object({
 })
 
 const aj = arcjet.withRule(
-    detectBot(
-        {
-        mode:"LIVE",
-        allow:[],
-
-    }
-    )
-
-).withRule(
     fixedWindow({
         mode:"LIVE",
         window:"1m",

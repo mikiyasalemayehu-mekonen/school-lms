@@ -25,6 +25,7 @@ export default async function SlugPage({params}:{params:Params}){
 
                     <div className="absolute inset-0 bg-linear-to-t from-black/20  to-transparent"></div>
                     </div>
+
                     <div className="mt-8 space-y-6">
                         <div className="space-y-4">
                             <h1 className="text-4xl font-bold tracking-tight"> {course.title}   </h1>
@@ -48,16 +49,19 @@ export default async function SlugPage({params}:{params:Params}){
 
                             </Badge>
                         </div>
+                         <Separator className="my-8"/>
 
 
-                    </div>
-                    <Separator className="my-8"/>
+
+
                     <div className="space-y-6">
                         <h2 className="text-3xl font-semibold tracking-tight">Course Description</h2>
 
                            <RenderDescription json={JSON.parse(course.description || "xs jbhsd")}/>
 
                     </div>
+                    </div>
+
                     <div className="space-y-6 mt-12">
                         <div className="flex items-center justify-between">
                             <h2 className="text-3xl font-semibold tracking-tight">
@@ -144,10 +148,9 @@ export default async function SlugPage({params}:{params:Params}){
 
                 </div>
 
-
-
             </div>
-                <div className="order-2 lg:col-span-2">
+            {/* Enrollment Card */}
+                <div className="order-2 lg:col-span-1">
                 <div className="sticky top-20">
                 <Card className="py-0">
                     <CardContent className="p-6">
