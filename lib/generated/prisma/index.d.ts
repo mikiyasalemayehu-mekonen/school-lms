@@ -11751,6 +11751,7 @@ export namespace Prisma {
 
   export type EnrollmentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    courseId_userId?: EnrollmentCourseIdUserIdCompoundUniqueInput
     AND?: EnrollmentWhereInput | EnrollmentWhereInput[]
     OR?: EnrollmentWhereInput[]
     NOT?: EnrollmentWhereInput | EnrollmentWhereInput[]
@@ -11762,7 +11763,7 @@ export namespace Prisma {
     userId?: StringFilter<"Enrollment"> | string
     Course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "courseId_userId">
 
   export type EnrollmentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -13097,6 +13098,11 @@ export namespace Prisma {
     in?: $Enums.EnrollmentStatus[] | ListEnumEnrollmentStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.EnrollmentStatus[] | ListEnumEnrollmentStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumEnrollmentStatusFilter<$PrismaModel> | $Enums.EnrollmentStatus
+  }
+
+  export type EnrollmentCourseIdUserIdCompoundUniqueInput = {
+    courseId: string
+    userId: string
   }
 
   export type EnrollmentCountOrderByAggregateInput = {

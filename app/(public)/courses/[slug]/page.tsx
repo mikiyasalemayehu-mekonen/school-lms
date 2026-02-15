@@ -1,19 +1,22 @@
 import { getIndividualCourse } from "@/app/data/course/get-course";
 import { RenderDescription } from "@/components/rich-text-editor/RenderDescription";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
 import { IconBook, IconCategory, IconChartBar, IconChevronDown, IconClock, IconPlayerPlay } from "@tabler/icons-react";
 import { CheckIcon } from "lucide-react";
 import Image from "next/image";
+import { checkIfCourseBought } from "@/app/data/user/user-is-enrolled";
+import Link from "next/link";
+import { EnrollmentButton } from "./_component/EnrollmentButton";
 
 type Params = Promise<{slug:string}>
 
 export default async function SlugPage({params}:{params:Params}){
     const {slug} =  await params;
     const course =await getIndividualCourse(slug);
+    const isEnrolled = await checkIfCourseBought(course.id);
     return (
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 mt-5">
             <div className="order-1 lg:col-span-2">
@@ -231,7 +234,7 @@ export default async function SlugPage({params}:{params:Params}){
                         </div>
                         <div className="mb-6 space-y-3">
                             <h4>
-                                This COurse Includes:
+                                This Course Includes:
                             </h4>
                             <ul className="space-y-2">
                                 <li className="flex items-center gap-2 text-sm">
@@ -256,9 +259,18 @@ export default async function SlugPage({params}:{params:Params}){
                             </ul>
 
                         </div>
-                        <Button className="w-full">
-                            Enrol Now!
-                        </Button>
+                        {isEnrolled ?
+                        (<Link href="/dashboard">
+                            Watch Course
+
+                        </Link>):(
+
+                            <EnrollmentButton  courseId={course.id}/>
+
+
+                        )
+                    }
+
                         <p className="mt-3 text-center text-xs text-muted-foreground  ">30-day Money-Back Guarantee</p>
 
 

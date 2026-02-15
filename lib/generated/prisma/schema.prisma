@@ -151,6 +151,8 @@ model Enrollment {
   courseId  String
   User      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+
+  @@unique([courseId, userId])
 }
 
 enum EnrollmentStatus {
