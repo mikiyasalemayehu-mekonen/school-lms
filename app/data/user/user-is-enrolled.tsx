@@ -11,7 +11,7 @@ export async function checkIfCourseBought(courseId: string): Promise<boolean>{ {
     }
     const enrollment = await prisma.enrollment.findUnique({
         where:{
-            courseId_userId:{
+            userId_courseId:{
                 courseId:courseId,
                 userId:session.user.id,
             },

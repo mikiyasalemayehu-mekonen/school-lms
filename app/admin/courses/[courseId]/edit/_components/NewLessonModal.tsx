@@ -26,11 +26,10 @@ export  function NewLessonModal({courseId,chapterId} :{courseId:string,chapterId
       });
 
  async function onSubmit(values:lessonSchemaType) {
-    console.log("Form submitted with values:", values);
+
     startTransition(async () => {
-        console.log("Starting transition...");
         const {data:result,error} = await tryCatch(createLesson(values));
-        console.log("Result:", result, "Error:", error);
+
         if (error){
             toast.error("AN unexpected error happened. Please try again");
             return

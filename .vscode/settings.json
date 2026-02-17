@@ -1,3 +1,10 @@
 {
-    "editor.linkedEditing": true
+    "editor.linkedEditing": true,
+    "python-envs.pythonProjects": [
+        {
+            "path": "app/api/webhook",
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
+        }
+    ]
 }

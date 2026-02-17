@@ -107,14 +107,14 @@ const { presignedUrl, key } = await presignedResponse.json();
 
                     }
                     else{
-                         console.error('XHR Upload failed:', xhr.status, xhr.statusText, xhr.responseText);
+
                         reject(new Error("upload failed..."))
                     }
 
 
             };
           xhr.onerror = () => {
-             console.error('XHR Network error');
+
                         reject( new Error('Upload Failed'))
                     }
                     xhr.open('PUT', presignedUrl);

@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, XIcon } from "lucide-react";
 import Link from "next/link";
 
-export function PaymentCancelled(){
+export default function PaymentCancelled(){
     return (
         <div className="w-full min-h-screen flex flex-1 items-center justify-center">
             <Card className="w-[350px]">
