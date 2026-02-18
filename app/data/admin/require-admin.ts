@@ -1,11 +1,12 @@
-import "server-only"
-
+import "server-only";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import {cache} from "react";
 
-export async function requireAdmin(){
-    const session  = await auth.api.getSession({
+export  const requireAdmin = cache(async () => {
+
+ const session  = await auth.api.getSession({
         headers :await headers(),
     });
 
@@ -18,4 +19,5 @@ export async function requireAdmin(){
     }
     return session
 
-}
+
+});

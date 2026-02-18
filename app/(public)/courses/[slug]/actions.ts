@@ -135,6 +135,8 @@ try{
             line_items:[
     {
         price_data:{
+            price:"price_1N8Xo2LhJqYqYpQWlHj6s9g",
+
             currency:"usd",
             product_data:{
                 name:course.title,
