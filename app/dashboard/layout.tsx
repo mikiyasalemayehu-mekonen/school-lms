@@ -1,16 +1,13 @@
-import { AppSidebar } from "@/components/sidebar/app-sidebar"
-import { SiteHeader } from "@/components/sidebar/site-header"
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
 
-import { Children } from "react"
-export default function AdminLayout({
-    children}: {children: React.ReactNode
-}){
+import { SiteHeader } from "@/components/sidebar/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "./_components/DashboardAppSidebar";
+
+export default function DashboardLayout({
+    children,
+}:{children: React.ReactNode}) {
     return (
-    <SidebarProvider
+         <SidebarProvider
       style={
         {
           "--sidebar-width": "calc(var(--spacing) * 72)",
@@ -30,5 +27,6 @@ export default function AdminLayout({
         </div>
       </SidebarInset>
     </SidebarProvider>
-    );
+    )
+
 }
