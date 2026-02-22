@@ -11,11 +11,12 @@ interface iAppProps{
         description:string | null;
     };
     slug:string;
+    isActive?:boolean;
+    completed?:boolean;
 }
 
-export function LessonItem({lesson,slug}:iAppProps){
+export function LessonItem({lesson,slug,isActive,completed}:iAppProps){
 
-    const completed = false;
     return (
        <Link
        href={`/dashboard/${slug}/${lesson.id}`}
@@ -23,7 +24,8 @@ export function LessonItem({lesson,slug}:iAppProps){
         variant:completed? 'secondary':"outline",
         className: cn(
             "w-full p-2.5 h-auto justify-start transition-all",
-            completed && "bg-green-100 border-green-300 dark:bg-green-900/30  dark:border-green-700 hover:bg-green-200 dark:hover:bg-green-900/50 text-green-800 dark:text-green-200 "
+            completed && "bg-green-100 border-green-300 dark:bg-green-900/30  dark:border-green-700 hover:bg-green-200 dark:hover:bg-green-900/50 text-green-800 dark:text-green-200 ",
+            isActive && !completed && "bg-primary/10  dark:bg-primary/20 border-primary/50  hover:bg-primary/20 dark:hover:bg-primary/30 text-primary"
         )
 
        })}>
@@ -37,11 +39,11 @@ export function LessonItem({lesson,slug}:iAppProps){
                 ):(
                     <div className={
                     cn(
-                        "size-5 rounded-full bg-background border-2 flex justify-center items-center"
+                        "size-5 rounded-full bg-background border-2 flex justify-center items-center",isActive ? "border-primary/10 bg-primary/10 dark:bg-primary/20":"border-muted-foreground/60"
                     )
                 }>
                     <Play className={cn(
-                        "size-2.5 fill-current "
+                        "size-2.5 fill-current ",isActive ? "text-primary":"text-muted-foreground"
                     )}/>
                 </div>
 
@@ -52,7 +54,7 @@ export function LessonItem({lesson,slug}:iAppProps){
             <div className="flex-1 text-left min-w-0">
                 <p className={cn(
                     "font-medium text-xs truncate",
-                    completed && "text-green-800 dark:text-green-200"
+                    completed ? "text-green-800 dark:text-green-200" : isActive ? "text-primary font-semibold":"text-foreground"
 
                 )}>
                     {lesson.position}.{lesson.title}
@@ -60,6 +62,11 @@ export function LessonItem({lesson,slug}:iAppProps){
                 {completed && (
                     <p className="text-[10px] text-green-700 dark:text-green-300  font-medium">
                         Completed
+                    </p>
+                )}
+                {isActive && !completed && (
+                    <p className="text-[10px] text-primary font-medium">
+                        Currently Watching
                     </p>
                 )}
 

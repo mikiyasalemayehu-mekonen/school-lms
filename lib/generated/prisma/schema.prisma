@@ -11,17 +11,18 @@ datasource db {
 }
 
 model User {
-  id            String       @id
-  name          String
-  email         String
-  emailVerified Boolean      @default(false)
-  image         String?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  courses       Course[]
-  enrollment    Enrollment[]
+  id             String           @id
+  name           String
+  email          String
+  emailVerified  Boolean          @default(false)
+  image          String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  sessions       Session[]
+  accounts       Account[]
+  courses        Course[]
+  enrollment     Enrollment[]
+  lessonProgress LessonProgress[]
 
   stripeCustomerId String? @unique
 
@@ -132,16 +133,17 @@ model Chapter {
 }
 
 model Lesson {
-  id           String   @id @default(uuid())
-  title        String
-  description  String?
-  thumbnailKey String?
-  VideoKey     String?
-  position     Int
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  chapter      Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
-  chapterId    String
+  id             String           @id @default(uuid())
+  title          String
+  description    String?
+  thumbnailKey   String?
+  VideoKey       String?
+  position       Int
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  chapter        Chapter          @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapterId      String
+  LessonProgress LessonProgress[]
 }
 
 model Enrollment {
@@ -162,4 +164,18 @@ enum EnrollmentStatus {
   Pending
   Active
   Cancelled
+}
+
+model LessonProgress {
+  id        String   @id @default(uuid())
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lessonId  String?
+  userId    String?
+
+  Lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  User   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, userId])
 }

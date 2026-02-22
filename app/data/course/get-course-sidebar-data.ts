@@ -33,7 +33,16 @@ export async function getCourseSidebarData(slug:string){
                             id:true,
                             title:true,
                             position:true,
-                            description:true
+                            description:true,
+                            LessonProgress:{
+                                where:{
+                                    userId:session.id,
+                                },
+                                select:{
+                                    completed:true,
+                                    lessonId:true,
+                                    id:true,
+                                }
                         }
                     }
                 },
