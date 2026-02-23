@@ -18,7 +18,7 @@ export async function DELETE(request:Request){
 
     try{
            const decision = await aj.protect(request,{
-            fingerprint:session?.user.id as string,
+            fingerprint:session.user.id,
         });
         if (decision.isDenied() ){
                     return NextResponse.json(
