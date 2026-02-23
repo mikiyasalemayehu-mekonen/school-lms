@@ -9,6 +9,7 @@ import { LessonItem } from "./LessonItem";
 
 import path from "path";
 import { usePathname } from "next/navigation";
+import { useCourseProgress } from "@/hooks/use-course-progress";
 interface iAppProps {
     course:CourseSidebarDataType["course"];
 }
@@ -16,6 +17,8 @@ interface iAppProps {
 export function CourseSidebar({course}:iAppProps) {
     const pathname =usePathname()
     const currentLessonId = pathname.split("/").pop();
+
+    const { totalLessons, completedLessons, progressPercentage } = useCourseProgress({courseData: course});
     return (
         <div className="flex flex-col h-full">
             <div className="pb-4 pr-4 border-b border-border">
@@ -33,10 +36,10 @@ export function CourseSidebar({course}:iAppProps) {
                 <div className="space-y-2">
                     <div className="flex justify-between text-xs">
                         <span className="text-muted-foreground">progress</span>
-                        <span className="font-medium">1/5 completed</span>
+                        <span className="font-medium">{completedLessons}/{totalLessons} completed</span>
                     </div>
-                    <Progress value={55} className="h-1.5"/>
-                    <p className="text-xs text-muted-foreground">55% Complete</p>
+                    <Progress value={progressPercentage} className="h-1.5"/>
+                    <p className="text-xs text-muted-foreground">{progressPercentage}% Complete</p>
                     </div>
                     <div className="py-4 pr-4 space-y-3 ">
                         {course.chapter.map((chapter,index) => (
