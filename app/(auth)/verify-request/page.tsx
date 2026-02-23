@@ -3,17 +3,25 @@ import { Button } from "@/components/ui/button";
 import { Card, CardTitle,CardDescription, CardHeader, CardContent } from "@/components/ui/card";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { authClient } from "@/lib/auth-client";
-import { Loader, Loader2 } from "lucide-react";
+import {  Loader2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { startTransition, useState, useTransition } from "react";
-import { start } from "repl";
+import {  Suspense, useState, useTransition } from "react";
 import { toast } from "sonner";
-import { email } from "zod";
 
-export default function VerifyRequestPage(){
+export default function VerifyRequestRoute() {
+    return (
+    <Suspense>
+        <VerifyRequest/>
+    </Suspense>
+    )
+}
+
+
+
+ function VerifyRequest(){
     const [otp, setOtp] = useState("");
-    const [emailpending, setEmailPending] = useTransition();
+    const [emailpending, startTransition] = useTransition();
     const params = useSearchParams()
     const email = params.get("email") || "";
     const router = useRouter();
@@ -28,7 +36,7 @@ export default function VerifyRequestPage(){
                         toast.success("Successfully verified, You will be redirected...");
                         router.push('/');
                     },
-                    onError: (error) => {
+                    onError: () => {
                         toast.error("Invalid OTP, Please try again");
                     },
                 },

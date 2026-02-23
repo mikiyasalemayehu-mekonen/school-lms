@@ -5,7 +5,7 @@ import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownM
 import { Skeleton } from "@/components/ui/skeleton";
 import { useConstructUrl } from "@/hooks/use-construct-url";
 import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
-import { ArrowRight, ArrowRightCircle, Eye, MoreVertical, Pencil, School, TimerIcon } from "lucide-react";
+import { ArrowRight,  Eye, MoreVertical, Pencil, School, TimerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';
 

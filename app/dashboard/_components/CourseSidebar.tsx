@@ -7,7 +7,6 @@ import { Progress } from "@/components/ui/progress";
 import { ChevronDown, Play } from "lucide-react";
 import { LessonItem } from "./LessonItem";
 
-import path from "path";
 import { usePathname } from "next/navigation";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 interface iAppProps {

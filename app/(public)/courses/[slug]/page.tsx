@@ -127,7 +127,7 @@ export default async function SlugPage({params}:{params:Params}){
 
                                                     </div>
                                                     <div className="flex-1">
-                                                        <p className="font-medium text-sm"> {lesson.title}</p>
+                                                        <p className="font-medium text-sm"> {lessonIndex+1}. {lesson.title}</p>
                                                         <p className="text-xs text-muted-foreground mt-1"></p>
 
                                                     </div>

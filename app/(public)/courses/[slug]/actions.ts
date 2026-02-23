@@ -133,23 +133,20 @@ try{
         const checkoutSession = await stripe.checkout.sessions.create({
             customer:stripeCustomerId,
             line_items:[
-    {
-        price_data:{
-            price:"price_1N8Xo2LhJqYqYpQWlHj6s9g",
-
-            currency:"usd",
-            product_data:{
-                name:course.title,
-                metadata:{
-                    courseId:course.id,
-                },
-            },
-            unit_amount: course.price * 100,
-        },
-        quantity:1,
-    }
-],
-
+                {
+                    price_data:{
+                        currency:"usd",
+                        product_data:{
+                            name:course.title,
+                            metadata:{
+                                courseId:course.id,
+                            },
+                        },
+                        unit_amount: course.price * 100,
+                    },
+                    quantity:1,
+                }
+            ],
             mode:"payment",
             success_url: `${env.BETTER_AUTH_URL}/payment/success`,
             cancel_url: `${env.BETTER_AUTH_URL}/payment/cancel`,
@@ -159,6 +156,8 @@ try{
                 enrollmentId: enrollment.id,
             },
         });
+
+
         return {
             enrollment:enrollment,
             checkoutUrl: checkoutSession.url,

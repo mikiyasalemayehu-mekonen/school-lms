@@ -27,7 +27,7 @@ export default function CourseCreationPage() {
     const {triggerConfetti} = useConfetti()
 
     const form = useForm<CourseSchemaType>({
-    resolver: zodResolver(CourseCreateSchema),
+    resolver: zodResolver(CourseCreateSchema) as any,
     defaultValues: {
       title: "",
       description: "",

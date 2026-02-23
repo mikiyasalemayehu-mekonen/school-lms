@@ -22,7 +22,7 @@ export const auth = betterAuth({
     plugins: [
         emailOTP({
             async sendVerificationOTP({ email, otp }) {
-            const { data, error } = await resend.emails.send({
+            const { } = await resend.emails.send({
             from: 'School of Marvel <onboarding@resend.dev>',
             to: [email],
             subject: 'School of Marvel - Your Login OTP',

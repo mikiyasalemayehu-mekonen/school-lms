@@ -1,5 +1,4 @@
 import { getAllCourses } from "@/app/data/course/get-all-courses"
-import { get } from "http"
 import { PublicCourseCard, PublicCourseCardSkeleton } from "../_components/PublicCourseCard";
 import { Suspense } from "react";
 

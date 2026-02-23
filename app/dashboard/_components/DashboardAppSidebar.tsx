@@ -8,10 +8,8 @@ import {
   IconFileAi,
   IconFileDescription,
   IconHelp,
-  IconListDetails,
   IconSearch,
   IconSettings,
-  IconUsers,
 } from "@tabler/icons-react"
 import { NavMain } from "@/components/sidebar/nav-main"
 import { NavSecondary } from "@/components/sidebar/nav-secondary"

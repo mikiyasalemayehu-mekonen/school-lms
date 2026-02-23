@@ -63,7 +63,7 @@ export async function editCourse(data:CourseSchemaType,courseId:string): Promise
             },
             data:{
                 ...result.data,
-            }
+            } as any
         });
         return {
             status:"success",
@@ -219,7 +219,7 @@ export async function createLesson(values:lessonSchemaType): Promise<ApiResponse
             await tx.lesson.create({
                 data:{
                     title:result.data.name,
-                    description:result.data.desciption?? null,
+                    description:result.data.description?? null,
                     VideoKey:result.data.videoKey ?? null,
                     thumbnailKey:result.data.thumbnailKey?? null,
                     chapterId:result.data.chapterId,

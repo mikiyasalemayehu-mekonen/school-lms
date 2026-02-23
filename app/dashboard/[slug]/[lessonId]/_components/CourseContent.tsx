@@ -9,7 +9,6 @@ import { BookIcon, CheckCircle } from "lucide-react"
 import { useTransition } from "react"
 import { markLessonComplete } from "../actions"
 import { toast } from "sonner"
-import { error } from "better-auth/api"
 import { useConfetti } from "@/hooks/use-confetti"
 
 interface iAppProps{

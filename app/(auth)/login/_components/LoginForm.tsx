@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { Car, GithubIcon, Loader, Send } from "lucide-react"
-import { Span } from "next/dist/trace";
+import {  GithubIcon, Loader, Send } from "lucide-react"
+
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -27,7 +27,7 @@ export default function LoginForm(){
                 onSuccess: () => {
                     toast.success("Successfully signed in with GitHub,You Will be redirected...");
                 },
-                onError: (error) => {
+                onError: () => {
                     toast.error("Internal Server Error, Please try again later");
                 },
             },
@@ -45,7 +45,7 @@ export default function LoginForm(){
                         router.push('/verify-request?email='+email);
 
                     },
-                    onError: (error) => {
+                    onError: () => {
                         toast.error("Internal Server Error, Please try again later");
                     },
                 },

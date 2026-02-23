@@ -4,7 +4,6 @@ import { requireAdmin } from "@/app/data/admin/require-admin";
 import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
 import { lessonSchema, lessonSchemaType } from "@/lib/zodSchemas";
-import { title } from "process";
 
 export async function updateLesson(values:lessonSchemaType,lessonId:string):
  Promise<ApiResponse>{

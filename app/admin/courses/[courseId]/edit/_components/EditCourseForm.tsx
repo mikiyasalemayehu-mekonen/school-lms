@@ -13,7 +13,7 @@ import { RichTextEditor } from "@/components/rich-text-editor/Editor";
 import { Uploader } from "@/components/file-uploader/Uploader";
 import { useTransition } from "react";
 import { tryCatch } from "@/hooks/try-catch";
-import { CreateCourse } from "../../../create/actions";
+
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { editCourse } from "../actions";
@@ -28,13 +28,13 @@ export function EditCourseForm({data}:iAppProps){
        const [Pending,startTransition] = useTransition();
         const router = useRouter()
         const form = useForm<CourseSchemaType>({
-resolver: zodResolver(CourseCreateSchema),
+resolver: zodResolver(CourseCreateSchema) as any,
 defaultValues: {
     title: data.title,
     description: data.description || "",
     fileKey:data.fileKey,
-    price: data.price,
-    duration: data.duration,
+    price: Number(data.price),
+    duration: Number(data.duration),
     level: data.level,
     category: data.category as CourseSchemaType['category'],
     smallDescription: data.smallDescription || "",
@@ -176,27 +176,35 @@ defaultValues: {
                                 </FormItem>
 
                                )}/>
-                                 <FormField control={form.control} name="duration"  render={({field })=>(
-                                <FormItem>
-                                    <FormLabel>Duration(hours)</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Duration" type="number" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-
-                               )}/>
-                                <FormField control={form.control} name="price"  render={({field })=>(
-                                <FormItem>
-                                    <FormLabel>Price($)</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Price" type="number" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-
+                               <FormField control={form.control} name="duration"  render={({field })=>(
+                                   <FormItem>
+                                       <FormLabel>Duration(hours)</FormLabel>
+                                       <FormControl>
+                                           <Input
+                                               placeholder="Duration"
+                                               type="number"
+                                               value={field.value}
+                                               onChange={(e) => field.onChange(Number(e.target.value))}
+                                           />
+                                       </FormControl>
+                                       <FormMessage />
+                                   </FormItem>
                                )}/>
 
+                               <FormField control={form.control} name="price"  render={({field })=>(
+                                   <FormItem>
+                                       <FormLabel>Price($)</FormLabel>
+                                       <FormControl>
+                                           <Input
+                                               placeholder="Price"
+                                               type="number"
+                                               value={field.value}
+                                               onChange={(e) => field.onChange(Number(e.target.value))}
+                                           />
+                                       </FormControl>
+                                       <FormMessage />
+                                   </FormItem>
+                               )}/>
                                 </div>
                                 <FormField control={form.control} name="status"  render={({field })=>(
                                 <FormItem>

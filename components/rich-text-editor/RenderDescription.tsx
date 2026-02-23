@@ -2,10 +2,20 @@
 
 import { generateHTML } from "@tiptap/react";
 import { useMemo } from "react";
-import { type JSONContent } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from '@tiptap/extension-text-align'
 import parse from "html-react-parser";
+
+type JSONContent = {
+  type?: string;
+  attrs?: Record<string, any>;
+  content?: JSONContent[];
+  marks?: Array<{
+    type: string;
+    attrs?: Record<string, any>;
+  }>;
+  text?: string;
+};
 
 
 export function RenderDescription({json}:{json:JSONContent}){

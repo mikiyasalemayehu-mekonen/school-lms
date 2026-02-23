@@ -4,17 +4,10 @@ import { requireAdmin } from "@/app/data/admin/require-admin"
 import { prisma } from "@/lib/db"
 import { ApiResponse } from "@/lib/types"
 import { revalidatePath } from "next/cache"
-import arcjet, {fixedWindow } from "@/lib/arcjet";
+import arcjet from "@/lib/arcjet";
 import { request } from "@arcjet/next";
 
 
-const aj = arcjet.withRule(
-    fixedWindow({
-        mode:"LIVE",
-        window:"1m",
-        max:5,
-    })
-);
 
 export async function deleteCourse(courseId:string): Promise<ApiResponse>{
     const session = await requireAdmin()

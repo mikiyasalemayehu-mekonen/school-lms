@@ -1,7 +1,6 @@
 "use client"
 
 import confetti from 'canvas-confetti'
-import { number, unknown } from 'zod';
 
 export const useConfetti = () => {
     const triggerConfetti = () => {

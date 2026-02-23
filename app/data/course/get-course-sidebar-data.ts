@@ -50,8 +50,8 @@ export async function getCourseSidebarData(slug:string){
             }
 
 
-        }
-    })
+        }}
+    });
     if (!course){
         return notFound();
     }

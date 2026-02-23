@@ -27,7 +27,7 @@ interface iAppProps {
 
 }
 
-export function UserDropdown({name, email, image}: iAppProps  ) {
+export function UserDropdown({name,  image}: iAppProps  ) {
     const handleSignOut = useSignOut()
   return (
     <DropdownMenu>

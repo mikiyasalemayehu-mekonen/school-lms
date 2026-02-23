@@ -2,7 +2,6 @@ import arcjet, {  fixedWindow } from "@/lib/arcjet";
 import { env } from "@/lib/env";
 import { S3 } from "@/lib/S3Client";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/app/data/admin/require-admin";
 

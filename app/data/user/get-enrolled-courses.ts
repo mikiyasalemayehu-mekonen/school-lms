@@ -28,7 +28,7 @@ export async function getEnrolledCourses() {
                                     id: true,
                                     LessonProgress: {
                                         where: {
-                                            userId: user.id,
+                                            userId: user.user.id,
                                         },
                                         select: {
                                             id: true,

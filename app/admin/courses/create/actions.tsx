@@ -4,18 +4,12 @@ import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
 import { CourseCreateSchema, CourseSchemaType } from "@/lib/zodSchemas";
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcjet, {  fixedWindow } from "@/lib/arcjet";
+import arcjet  from "@/lib/arcjet";
 import { request } from "@arcjet/next";
 import { stripe } from "@/lib/stripe";
 
 
-const aj =arcjet.withRule(
-    fixedWindow({
-        mode:"LIVE",
-        window:"1m",
-        max:5,
-    })
-);
+
 
 export async function CreateCourse(values:CourseSchemaType): Promise<ApiResponse>{
     const session = await requireAdmin();
@@ -62,7 +56,7 @@ export async function CreateCourse(values:CourseSchemaType): Promise<ApiResponse
                 ...validation.data,
                 userId:session?.user.id as string,
                 stripePriceId:data.default_price as string,
-            },
+            } as any,
         });
         return {
             status:"success",

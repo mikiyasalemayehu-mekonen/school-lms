@@ -5,7 +5,6 @@ import Logo from "../../../public/logo.jpg"
 import { ThemeToggle } from "@/components/ui/themeToggle";
 import { authClient } from "@/lib/auth-client";
 import { buttonVariants } from "@/components/ui/button";
-import { User } from "lucide-react";
 import { UserDropdown } from "./UserDropdown";
 
 const navigationItems = [
