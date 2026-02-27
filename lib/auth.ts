@@ -23,9 +23,9 @@ export const auth = betterAuth({
         emailOTP({
             async sendVerificationOTP({ email, otp }) {
             const { } = await resend.emails.send({
-            from: 'School of Marvel <onboarding@resend.dev>',
+            from: 'SKillPAth<onboarding@resend.dev>',
             to: [email],
-            subject: 'School of Marvel - Your Login OTP',
+            subject: 'SkillPath - Your Login OTP',
             html:'<P>Your OTP code is: <strong>' + otp + '</strong></P><p>This code will expire in ~10 minutes.</p>',
         });
             },

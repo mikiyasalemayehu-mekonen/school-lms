@@ -1,7 +1,6 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,13 +30,11 @@ export function UserDropdown({name,  image}: iAppProps  ) {
     const handleSignOut = useSignOut()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Button variant="ghost" size="icon" className="rounded-full">
-          <Avatar>
-            <AvatarImage src={image} alt="profile" />
-            <AvatarFallback>{name?.[0]?.toUpperCase()}</AvatarFallback>
-          </Avatar>
-        </Button>
+      <DropdownMenuTrigger className="rounded-full">
+        <Avatar className="h-9 w-9">
+          <AvatarImage src={image} alt="profile" />
+          <AvatarFallback>{name?.[0]?.toUpperCase()}</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-48">
         <DropdownMenuGroup>
@@ -49,7 +46,7 @@ export function UserDropdown({name,  image}: iAppProps  ) {
 
           </DropdownMenuItem >
           <DropdownMenuItem asChild>
-           <Link href="/course" >
+           <Link href="/courses" >
              <BookOpen />
             Courses
             </Link>

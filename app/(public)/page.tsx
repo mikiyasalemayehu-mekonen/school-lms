@@ -41,7 +41,7 @@ export default function Home() {
     <section className="relative py-20">
         <div className="flex flex-col items-center text-center space-y-8">
             <Badge variant="outline">
-                The Future of Learning is Here - Welcome to the School of Marvel!
+                The Future of Learning is Here - Welcome to the SkillPath!
             </Badge>
 
       <h1 className="text-4xl md:text-6xl font-bold tracking-tight"> Elevate Your Learning Experience </h1>

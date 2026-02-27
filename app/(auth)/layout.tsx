@@ -19,7 +19,7 @@ export default function AuthLayout({children}:{children:React.ReactNode}) {
         <div className="flex w-full max-w-sm flex-col gap-6">
             <Link className="flex items-center gap-2 self-center font-medium" href="/">
             <Image src={logo} alt = "logo" width={32} height={32}/>
-            School of Marvel</Link>
+            SkillPath</Link>
 
             {children}
             <div className="text-balance text-center text-xs text-muted-foreground">

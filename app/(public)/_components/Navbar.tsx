@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "../../../public/logo.jpg"
+import Logo from "../../../public/logo.svg"
 import { ThemeToggle } from "@/components/ui/themeToggle";
 import { authClient } from "@/lib/auth-client";
 import { buttonVariants } from "@/components/ui/button";
@@ -21,10 +21,10 @@ export function Navbar() {
         <div className="container flex min-h-16 items-center mx-auto px-4 md:px-6 lg:px-8">
             <Link href="/" className="flex items-center space-x-2 mr-4">
             <Image src={Logo} alt = "Logo" className="size-9" />
-            <span className="text-xl font-bold">MY LMS</span>
+            <span className="text-xl font-bold">SkillPath</span>
             </Link>
             <nav className="hidden md:flex md:flex-1 md:items-center md:justify-between">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-6">
 {navigationItems.map((item) =>
     <Link key={item.name} href={item.href} className="text-sm font-medium transition-colors hover:text-primary ">
         {item.name}
