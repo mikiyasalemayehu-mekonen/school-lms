@@ -15,7 +15,7 @@ import {
   IconSettings,
   IconUsers,
 } from "@tabler/icons-react"
-import Logo from "../../public/logo.jpg"
+import Logo from "@/public/logo.svg"
 import { NavMain } from "@/components/sidebar/nav-main"
 import { NavSecondary } from "@/components/sidebar/nav-secondary"
 import { NavUser } from "@/components/sidebar/nav-user"
@@ -140,7 +140,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
     <Link href="/" className="flex items-center gap-2">
   <Image src={Logo} alt="logo" />
-  <span className="text-base font-semibold">LMS</span>
+  <span className="text-base font-semibold">SkillPath</span>
 </Link>
 
             </SidebarMenuButton>
