@@ -19,6 +19,7 @@ export const auth = betterAuth({
         },
 
     },
+    trustedOrigins:["https://school-lms-ten.vercel.app","http://localhost:3000/"],
     plugins: [
         emailOTP({
             async sendVerificationOTP({ email, otp }) {
