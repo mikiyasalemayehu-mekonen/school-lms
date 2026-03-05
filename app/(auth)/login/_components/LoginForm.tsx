@@ -23,7 +23,7 @@ export default function LoginForm(){
     await authClient.signIn.social({
             provider: "github",
             callbackURL:window.location.origin, // or a specific path like `${window.location.origin}/dashboard`
-,
+
             fetchOptions: {
                 onSuccess: () => {
                     toast.success("Successfully signed in with GitHub,You Will be redirected...");
