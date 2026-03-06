@@ -19,15 +19,20 @@ export function Navbar() {
     return (
        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-[backdrop-filter]:bg-background/60">
         <div className="container flex min-h-16 items-center mx-auto px-4 md:px-6 lg:px-8">
-            <Link href="/" className="flex items-center space-x-2 mr-4">
+            <Link href="/" className="flex items-center space-x-2 mr-12">
             <Image src={Logo} alt = "Logo" className="size-9" />
             <span className="text-xl font-bold">SkillPath</span>
             </Link>
             <nav className="hidden md:flex md:flex-1 md:items-center md:justify-between">
-                <div className="flex items-center space-x-6">
+                <div className="flex items-center space-x-8">
 {navigationItems.map((item) =>
-    <Link key={item.name} href={item.href} className="text-sm font-medium transition-colors hover:text-primary ">
+    <Link key={item.name} href={item.href} className="text-[16px] font-medium transition-colors hover:text-primary ">
         {item.name}
+    </Link>
+)}
+{session && (
+    <Link href="/dashboard" className="text-[16px] font-medium transition-colors hover:text-primary">
+        Dashboard
     </Link>
 )}
 

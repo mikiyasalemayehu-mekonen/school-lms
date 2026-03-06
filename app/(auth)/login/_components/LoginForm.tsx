@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import {  GithubIcon, Loader, Send } from "lucide-react"
 
@@ -22,7 +23,7 @@ export default function LoginForm(){
 
     await authClient.signIn.social({
             provider: "github",
-            callbackURL:window.location.origin, // or a specific path like `${window.location.origin}/dashboard`
+            callbackURL:window.location.origin,
 
             fetchOptions: {
                 onSuccess: () => {
@@ -56,22 +57,22 @@ export default function LoginForm(){
 
     return (
        <Card>
-        <CardHeader>
-        <CardTitle className="flex items-center justify-center">
+        <CardHeader className="py-8">
+        <CardTitle className="text-center text-2xl">
             Welcome Back!
         </CardTitle>
         <CardDescription className="text-center">
-        Login with your Github Email Account
+        Login with your Github or Email Account
         </CardDescription>
         </CardHeader>
 
-        <CardContent className="flex flex-col gap-4"  >
-        <Button  disabled={githubPending} className="w-full" variant={"outline"} onClick={signInWithGithub}>
+        <CardContent className="flex flex-col gap-6 pb-8">
+        <Button  disabled={githubPending} className="w-full h-11" variant={"outline"} onClick={signInWithGithub}>
 
        {githubPending ? (
         <>
         <Loader className="size-4 animate-spin"/>
-        <span>signing in...  </span>
+        <span>Signing in...  </span>
         </>
        ):(
         <><GithubIcon className="size-4"/>Sign in with GitHub</>
@@ -81,16 +82,16 @@ export default function LoginForm(){
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
             <span className="relative z-10 bg-card px-2 text-muted-foreground">Or continue with</span>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
             <div className="grid gap-2">
-                <Label htmlFor="email ">Email</Label>
-                <input id="email" type="email" onChange={(e)=>setEmail(e.target.value)} placeholder="m@example.com" required/>
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" className="h-11" onChange={(e)=>setEmail(e.target.value)} placeholder="m@example.com" required/>
             </div>
-            <Button className="w-full" onClick={signInWithEmail} disabled={emailPending}>
+            <Button className="w-full h-11" onClick={signInWithEmail} disabled={emailPending}>
                 {emailPending ? (
                     <>
                     <Loader className="size-4 animate-spin"/>
-                    <span>signing in...  </span>
+                    <span>Signing in...  </span>
                     </>
                 ):(
                     <><Send className="size-4"/><span>Continue with Email</span></>

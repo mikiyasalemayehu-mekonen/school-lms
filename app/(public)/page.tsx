@@ -3,6 +3,8 @@ import {  buttonVariants } from "@/components/ui/button";
 import {Badge}  from "@/components/ui/badge";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { authClient } from "@/lib/auth-client";
+
 interface featureProps {
   title: string;
   description: string;
@@ -34,7 +36,7 @@ const features: featureProps[] = [
   }
 ]
 export default function Home() {
-
+  const {data:session} = authClient.useSession();
 
   return (
     <>
@@ -51,10 +53,12 @@ export default function Home() {
         size: "lg",
 
       })} href="/courses"> Explore Courses</Link>
-      <Link className={buttonVariants({
-        size: "lg",
-        variant: "outline"
-      })} href="/login"> Sign in</Link>
+      {!session && (
+        <Link className={buttonVariants({
+          size: "lg",
+          variant: "outline"
+        })} href="/login"> Sign in</Link>
+      )}
       </div>
       </div>
     </section>

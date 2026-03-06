@@ -7,13 +7,13 @@ export const dynamic = "force-dynamic";
 export default function PublicCoursesroute(){
     return (
         <div className="mt-5">
-            <div className="flex flex-col sapce-y-2 mb-10">
+            <div className="flex flex-col space-y-2 mb-10">
                 <h1 className="text-3xl md:text-4xl font-bold tracking-tighter">Explore Courses</h1>
                 <p className="text-muted-foreground">Discover Our Wide Range of Courses designed to help you achieve Your Learning Goals.</p>
 
             </div>
             <Suspense fallback={<LoadingSkeletonLayout/>}></Suspense>
-            <RenderCourses/>
+                <RenderCourses/>
         </div>
     );
 }
