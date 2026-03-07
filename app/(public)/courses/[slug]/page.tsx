@@ -158,18 +158,21 @@ export default async function SlugPage({params}:{params:Params}){
                 <div className="sticky top-20">
                 <Card className="py-0">
                     <CardContent className="p-6">
-                        <div className="flex items-center justify-between mb-6">
+                        <div className="flex flex-col gap-4 mb-6">
+                            <div className="flex items-center justify-between">
                                 <span className="text-lg font-medium">Price:</span>
-                                <span className="text-2xl font-bold text-primary">{new Intl.NumberFormat('en-US',{
+                                <span className="text-3xl font-bold text-primary">{new Intl.NumberFormat('en-US',{
                                     style:'currency',
                                     currency:'USD'
                                 }).format(course.price || 0)}</span>
-                                <button className="bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-2 rounded-lg font-medium transition-colors">
-                                    Enroll Now
-
-                                </button>
-
-
+                            </div>
+                            {isEnrolled ? (
+                                <Link className={buttonVariants({className:"w-full"})} href="/dashboard">
+                                    Watch Course
+                                </Link>
+                            ) : (
+                                <EnrollmentButton courseId={course.id}/>
+                            )}
                         </div>
                         <div className="mb-6 space-y-3 rounded-lg bg-muted p-4">
                             <h4 className="font-medium">What You Will get:</h4>

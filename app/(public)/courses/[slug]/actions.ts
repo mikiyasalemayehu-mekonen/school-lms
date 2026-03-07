@@ -8,17 +8,6 @@ import {stripe} from "@/lib/stripe";
 import Stripe from "stripe";
 import { redirect } from "next/navigation";
 import { env } from "@/lib/env";
-import arcjet, { fixedWindow } from "@/lib/arcjet";
-import { request } from "@arcjet/next";
-
-const aj  =  arcjet.withRule(
-    fixedWindow({
-        mode:"LIVE",
-        window:"1m",
-        max:5,
-    })
-);
-
 
 
 
@@ -26,17 +15,6 @@ export async function enrollInCourseAction(courseId:string):Promise<ApiResponse 
     const user = await requireUser();
     let checkoutUrl : string;
 try{
-    const req = await request();
-    const decision = await aj.protect(req,{
-        fingerprint:user.id,
-
-    });
-    if (decision.isDenied()){
-        return {
-            status:"error",
-            message:"You have been blocked from performing this action due to suspicious activity. Please try again later.",
-        };
-    }
     const course = await prisma.course.findUnique({
         where:{
             id:courseId,

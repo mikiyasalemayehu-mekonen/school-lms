@@ -1,3 +1,4 @@
+"use client";
 
 import { EnrolledCourseType } from "@/app/data/user/get-enrolled-courses";
 import { Badge } from "@/components/ui/badge";
@@ -82,4 +83,3 @@ export function PublicCourseCardSkeleton(){
         </Card>
     )
 }
-

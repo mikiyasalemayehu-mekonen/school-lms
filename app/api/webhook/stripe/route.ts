@@ -27,32 +27,38 @@ export async function POST(req:Request){
         console.log("Metadata:", session.metadata);
 
         const  courseId = session.metadata?.courseId;
+        const enrollmentId = session.metadata?.enrollmentId;
         const customerId = session.customer as string;
+        
         if (!courseId ){
             console.error("❌ CourseId not found in metadata");
-            throw new Error("CourseId is not Found");
-
-            };
+            return new Response("CourseId not found", { status: 400 });
+        }
+        
+        if (!enrollmentId){
+            console.error("❌ EnrollmentId not found in metadata");
+            return new Response("EnrollmentId not found", { status: 400 });
+        }
+        
         const user = await prisma.user.findUnique({
             where:{
                 stripeCustomerId:customerId,
             },
         });
+        
         if (!user){
             console.error("❌ User not found for customer:", customerId);
-            throw new Error("User not found ....");
+            return new Response("User not found", { status: 400 });
         }
 
-        console.log("Updating enrollment:", session.metadata?.enrollmentId);
+        console.log("Updating enrollment:", enrollmentId);
         await prisma.enrollment.update({
             where:{
-                id:session.metadata?.enrollmentId as string,
+                id:enrollmentId,
             },
             data:{
-                userId:user.id,
-                courseId:courseId,
-                amount:session.amount_total as number,
                 status:"Active",
+                amount: (session.amount_total || 0) / 100,
             },
         });
         console.log("✅ Enrollment updated to Active");
